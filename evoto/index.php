@@ -1,6 +1,5 @@
 <?php 
 include ('cabecera.php');
-include ('bdd_funciones.php');
  ?>
     <body>
         <div id="page-wrapper">
@@ -18,32 +17,41 @@ include ('bdd_funciones.php');
             </div>
             <?php 
                 $cargos=consultar_cargos();
+                echo "<form action='votar.php' method='post'>";
                 if ($cargos==0) {
                     echo "No hay cargos registrados";
                 }else{
                     foreach ($cargos as $cargo) {
-                    $candidatos=consultarcandidatosporcargo($cargo);
+                    $candidatos=consultarcandidatosporcargo($cargo['cargo']);
+                    echo "<h3>Candidatos para el cargo de:".$cargo['cargo']."<h3>";
                     if ($candidatos==0) {
                         echo "No hay candidatos para el cargo";
                     }else{
-                        echo "<div>";
-                        echo "<h3>Candidatos para el cargo de:".$cargo."<h3>";
+                         echo "<section>";
                         foreach ($candidatos as $candidato) {
                             $id_candidato=$candidato['id_candidato'];
-                            echo "<article>";
-                                echo "<figure>";
-                                    //echo "<img src=candidato['img']>";
-                                echo "<figure>";
+                            echo "<article class='cursos css'>";
+                            echo "<figure>";
+                                echo "<img src='http://icons.iconarchive.com/icons/custom-icon-design/pretty-office-2/128/man-icon.png'>";
+                            echo "</figure>"; 
+                                echo "<div><span class='tipo'>";
                                 echo "<h2>Descripcion <h2>";
                                 echo "<p> Nombre:".$candidato['candidato']."</br>
-                                          Descripcion:".$candidato['descripcion'];
+                                          Descripcion:".$candidato['descripcion']."</br>
+                                          Lista:".$candidato['lista'];
+                                echo "</div>";
+                                echo "<input type='radio' name='".trim($cargo['cargo'])."' value=".$id_candidato."> Votar";
                             echo "</article>";  
                         }
-                        echo "</div>";
-                    }
-                }
+                        echo "</section>";
+                    }  
+                }   
             }
+            echo "<input class='btn btn-info' type='submit' value='votar'>";
+            echo "<form>";
+      
             ?>
     <!-- /#wrapper -->
+    </div>
     </body>
 </html>

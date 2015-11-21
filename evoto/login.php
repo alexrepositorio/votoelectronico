@@ -1,6 +1,7 @@
 
 <?php
 include('cabecera_login.php'); 
+
 echo "<body>";
 $mensaje='';
 if (isset($_GET["action"])=="autenticar") {
@@ -13,8 +14,12 @@ if (isset($_GET["action"])=="autenticar") {
         $_SESSION['cuenta']=$user;
         $_SESSION['correo']=$ingreso['correo'];
         $_SESSION['titulacion']=$ingreso['titulacion'];
-		header ('Location: index.php');
-		
+         $_SESSION['acceso']=$ingreso['tipo'];
+        if ($_SESSION['acceso']=='admin') {
+         	header ('Location: admin_tablas.php');
+        }else{
+        	header ('Location: index.php');	
+        }		
 	}else  {
 		$mensaje= "Usuario o contraseña incorrectos, intentelo de nuevo";
 	}
@@ -29,7 +34,7 @@ if (isset($_GET["action"])=="autenticar") {
 				<td align=center><menuindex><h2>Contraseña</td>
 			</tr>";
 	echo "	<tr>
-				<td align=center><input type='text' name=user color='black'></td>
+				<td align=center><input type='text' name=user></td>
 				<td align=center><input type='password' name=pwd></td>
 			</tr>";
 	echo "

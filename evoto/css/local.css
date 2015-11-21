@@ -7,7 +7,6 @@ html {
 body {
   margin: 0;
 }
-article,
 aside,
 details,
 figcaption,
@@ -17,9 +16,28 @@ header,
 hgroup,
 main,
 nav,
-section,
+section,div,
 summary {
   display: block;
+}
+section article.cursos{
+  border-radius: 0px 0px 15px 15px;
+  border-style: solid;
+  border-width: 2px;
+  display: inline-block;
+  font-size: 1em;
+  margin: 50px 0px 20px 10%;
+  width: 25%;
+  text-align: center;
+  background:linear-gradient( 0deg, #008080, #000000);
+}
+section article.cursos figure img{
+  text-align: right;
+  border-radius: 20%;
+  border-style: solid;
+  border-width: 5px;
+  height: 140px;
+  width: 120px;
 }
 audio,
 canvas,
